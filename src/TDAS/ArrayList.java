@@ -41,8 +41,8 @@ public class ArrayList<E> implements List<E>{
     private void addCapacity(){
         E[] temp = (E[]) new Object[capacity + (capacity*2/3)];
         
-        for(int i = 0; i < capacity; i++)
-            temp[i] = array[i];
+        for(int j = 0; j < capacity; j++)
+            temp[j] = array[j];
                 
         array = temp;
         capacity = capacity + (capacity*2/3);
