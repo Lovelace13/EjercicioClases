@@ -5,8 +5,6 @@
  */
 package TDAS;
 
-import java.util.List;
-
 /**
  *
  * @author ktiusk
@@ -21,7 +19,6 @@ public class ArrayList<E> implements List<E>{
         efectivo = 0;
     }
     
-    @Override
     public int size(){
         return efectivo;
     }
@@ -65,6 +62,70 @@ public class ArrayList<E> implements List<E>{
     
     public boolean isEmpty(){
         return efectivo == 0;
+    }   
+    
+    public boolean removeFirst(){
+        if(isEmpty())
+            return false;
+        for(int i=0; i<efectivo-1;i++){
+            array[i]=array[i+1];
+        }
+        array[--efectivo]=null;
+        return false;
+    }
+    
+    public boolean removeLast(){
+        if(isEmpty())
+            return false;
+        array[--efectivo]=null;
+        return true;
+    }
+    
+    @Override
+    public String toString(){
+        StringBuilder sb= new StringBuilder();
+        sb.append("[");
+        for(int i=0; i<efectivo;i++){
+            sb.append(array[i]+";");
+        }
+        sb.substring(0,sb.length()-1);
+        sb.append("]");
+        return sb.toString();
     }
 
+    public boolean contains(E element){
+        if(element==null) 
+            return false;
+        for(int i=0; i<efectivo;i++ ){
+            if(array[i].equals(element)); 
+                return true;                   
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == obj || !(obj instanceof ArrayList)) 
+           return false;
+        ArrayList <E> other=(ArrayList <E>) obj;
+        if(this.efectivo != other.efectivo)
+            return false;
+        for(int i=0; i<this.efectivo;i++){
+            if(!this.array[i].equals(other.array[i]))
+                return false;
+        }
+        return true;
+    }
+    
+    public List<E> slicing(int start, int end){
+        E[] temp = (E[]) new Object[efectivo];
+        List<E> l = new ArrayList<>();     
+        int count = 0;
+        
+        for(int i = 0; i < capacity; i++){
+            if( i == start){
+                l[count] = array[i];
+            }
+        }
+    }
 }
