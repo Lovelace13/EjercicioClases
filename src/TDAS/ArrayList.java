@@ -124,8 +124,13 @@ public class ArrayList<E> implements List<E>{
         
         for(int i = 0; i < capacity; i++){
             if( i == start){
-                l[count] = array[i];
+                temp[count] = array[i];
             }
         }
+    }
+
+    @Override
+    public void reverse() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
