@@ -117,20 +117,39 @@ public class ArrayList<E> implements List<E>{
         return true;
     }
     
+    @Override
     public List<E> slicing(int start, int end){
-        E[] temp = (E[]) new Object[efectivo];
-        List<E> l = new ArrayList<>();     
-        int count = 0;
+      
+        ArrayList<E> l = new ArrayList<>();     
         
-        for(int i = 0; i < capacity; i++){
-            if( i == start){
-                temp[count] = array[i];
+        if(start == this.capacity)
+            return l;
+        
+        if(start >= 0 && start < efectivo){
+            for(int i = start; i < end; i++){
+                l.addLast(this.array[i]);
             }
-        }
+        }        
+        return l;
     }
+    
+
 
     @Override
     public void reverse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        E temp = (E) new Object();
+                
+        for(int i = 0; i < capacity/2; i ++){
+            temp = array[i];
+            array[i] = array[array.length - i -1];
+            array[array.length - i -1] = temp;
+        }
+    }
+    
+    private void reverse(int start, int end){
+        if (start < end){
+            E temp = this.array[end];
+        }
     }
 }
