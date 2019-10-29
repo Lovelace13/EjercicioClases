@@ -16,6 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         ArrayList<String> nombres = new ArrayList<String>();
+        ArrayList<String> NuevosNombres = new ArrayList<String>();
         
         nombres.addLast("Juan");
         nombres.addLast("María");
@@ -26,7 +27,16 @@ public class Main {
         nombres.addLast("Fabricio");
         
         System.out.println(nombres);
-        nombres.slicing(2,5);
+        NuevosNombres = (ArrayList) nombres.slicing(2,5);
+        System.out.println(NuevosNombres);
+        nombres.reverse();
+        System.out.println(nombres);
+        nombres.set(4, "Ericka");
+        System.out.println(nombres);
+        nombres.insert(4, "Joyce");
+        nombres.insert(1, "Katiuska");
+        System.out.println(nombres);
+        nombres.remove(9);
         System.out.println(nombres);
     }
     

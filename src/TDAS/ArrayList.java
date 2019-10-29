@@ -8,10 +8,21 @@ package TDAS;
 /**
  *
  * @author ktiusk
+ * @param <E>
  */
 public class ArrayList<E> implements List<E>{
+    
+    /**
+    *Es el arreglo contenedor de los elementos del ArrayList
+    */
     private E[] array;
+    /**
+    *Representa la capacidad total de elementos que puede guardar el ArrayList
+    */
     private int capacity = 10;
+    /**
+    *Guarda el número total de elementos del ArrayList
+    */
     private int efectivo;
     
     public ArrayList(){
@@ -23,6 +34,7 @@ public class ArrayList<E> implements List<E>{
         return efectivo;
     }
     
+    @Override
     public boolean addLast(E element){
         if(element == null)
             return false;
@@ -45,6 +57,7 @@ public class ArrayList<E> implements List<E>{
         capacity = capacity + (capacity*2/3);
     }
     
+    @Override
     public boolean addFirst(E element){
         if(element == null)
             return false;
@@ -60,10 +73,12 @@ public class ArrayList<E> implements List<E>{
         return true;
     }
     
+    @Override
     public boolean isEmpty(){
         return efectivo == 0;
     }   
     
+    @Override
     public boolean removeFirst(){
         if(isEmpty())
             return false;
@@ -74,6 +89,11 @@ public class ArrayList<E> implements List<E>{
         return false;
     }
     
+    /**
+     *Quita el último elemento del ArrayList
+     * @return
+     */
+    @Override
     public boolean removeLast(){
         if(isEmpty())
             return false;
@@ -93,6 +113,7 @@ public class ArrayList<E> implements List<E>{
         return sb.toString();
     }
 
+    @Override
     public boolean contains(E element){
         if(element==null) 
             return false;
@@ -120,9 +141,12 @@ public class ArrayList<E> implements List<E>{
     @Override
     public List<E> slicing(int start, int end){
       
-        List<E> l = new ArrayList<>();     
+        List<E> l = new ArrayList<E>();     
         
         if(start == this.capacity)
+            return l;
+        
+        if(start > end)
             return l;
         
         if(start >= 0 && start < efectivo){
@@ -133,17 +157,25 @@ public class ArrayList<E> implements List<E>{
         return l;
     }
     
-
-
+    /**
+     * Método que invierte el orden de los elementos de el ArrayList
+     */
     @Override
     public void reverse() {
         
         E temp = (E) new Object();
+        int recorrido;
+        if(this.efectivo > 1){
+            if(this.efectivo%2 == 0)
+                recorrido = (this.efectivo)/2;
+            else
+                recorrido = (this.efectivo - 1)/ 2;
                 
-        for(int i = 0; i < capacity/2; i ++){
-            temp = array[i];
-            array[i] = array[array.length - i -1];
-            array[array.length - i -1] = temp;
+            for(int i = 0; i < recorrido; i ++){
+                temp = array[i];
+                this.array[i] = this.array[this.efectivo - i -1];
+                this.array[this.efectivo - i -1] = temp;
+            }
         }
     }
     
@@ -152,19 +184,70 @@ public class ArrayList<E> implements List<E>{
             E temp = this.array[end];
         }
     }
-
+    
+    /**
+    *Remplaza el element que se encuentra en index
+     * @param index
+     * @param element
+     * @return boolean
+    */
     @Override
-    public boolean set(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean set(int index, E element) 
+    {
+        if(isEmpty())
+            return false;
+        
+        if(index > this.efectivo)
+            return false;   
+     
+        this.array[index - 1] = element;
+        return true;
     }
 
+    /**
+     * Agrega el element en index desplazando los elementos que se encuentran a la derecha de index
+     * @param index
+     * @param element
+     * @return 
+     */
     @Override
     public boolean insert(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(index > this.efectivo)
+            return false; 
+        
+        if(index <= 0)
+            return false;
+        
+        this.array[++efectivo] = null;
+        
+        for(int i = this.efectivo - 1; i >= index ; i--){
+            this.array[i] = this.array[i-1];
+        }
+        this.array[index - 1] = element;
+        return true;
     }
 
+    /**
+     * Remueve el elemento de index y compacta el arreglo
+     * @param index
+     * @return 
+     */
     @Override
     public boolean remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(index > this.efectivo)
+            return false; 
+        
+        if(index <= 0)
+            return false;
+        
+        --this.efectivo;
+//        this.array[--this.efectivo] = null;
+        
+        for(int i = index - 1; i < this.efectivo ; i++){
+            this.array[i] = this.array[i+1];
+        }
+
+        return true;
     }
 }
