@@ -120,7 +120,7 @@ public class ArrayList<E> implements List<E>{
     @Override
     public List<E> slicing(int start, int end){
       
-        ArrayList<E> l = new ArrayList<>();     
+        List<E> l = new ArrayList<>();     
         
         if(start == this.capacity)
             return l;
@@ -151,5 +151,20 @@ public class ArrayList<E> implements List<E>{
         if (start < end){
             E temp = this.array[end];
         }
+    }
+
+    @Override
+    public boolean set(int index, E element) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean insert(int index, E element) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean remove(int index) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

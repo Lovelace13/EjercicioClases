@@ -25,5 +25,7 @@ public interface List <E> {
 //    E get(int index);
     List<E> slicing(int start, int end);
     void reverse();
-
+    boolean set(int index, E element);
+    boolean insert(int index, E element); //Agrega el element en index desplazando los elementos que se encuentran a la derecha de index
+    boolean remove(int index); //Remueve el elemento de index y compacta el arreglo
 }
