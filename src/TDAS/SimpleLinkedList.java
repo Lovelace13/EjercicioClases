@@ -76,7 +76,20 @@ public class SimpleLinkedList<E> implements List<E> {
 
     @Override
     public boolean removeLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Node<E> temp;
+        
+        if(this.isEmpty())
+            return false;
+        else if (this.first == this.last)
+            this.first = this.last = null;
+        else{
+
+//            temp = this.getPrevious(this.last);
+//            this.last = temp;
+//            temp.setNext(null);
+//            efectivo--;
+        }
+        return true;
     }
 
     @Override
@@ -86,12 +99,29 @@ public class SimpleLinkedList<E> implements List<E> {
 
     @Override
     public boolean contains(E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Node<E> p = this.first; p != null; p = p.getNext())
+            if (p.getData().equals(element))
+                return true;
+
+        return false;
     }
 
     @Override
     public List<E> slicing(int start, int end) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int cont = 0;
+        List<E> lit = new SimpleLinkedList<>();
+        
+        for(Node<E> p = this.first ; p != null; p = p.getNext()){
+            
+            if ( start <= cont && end <= cont) {
+                
+                lit.addFirst(p.getData());
+                
+            }
+            cont++;
+        }
+            
+        return lit;
     }
 
     @Override
@@ -114,5 +144,34 @@ public class SimpleLinkedList<E> implements List<E> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
+    public String toString() {
+        String s = "[";
+        for(Node<E> p = this.first; p != null; p = p.getNext())
+            if ( p.getNext() != this.getLast())
+                s+= p.getData() + ",";
+            else
+                s+= p.getData();
+        s+="]";
+        return s;
+        
+    }
+
+    @Override
+    public E getFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E getLast() {
+        if(this.isEmpty())
+            return null;
+        return this.last.getData();
+    }
+    
+    @Override
+    public boolean  equals(Object other)    {
+      return this == other;
+   }
    
 }

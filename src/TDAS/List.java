@@ -17,8 +17,8 @@ public interface List <E> {
     boolean removeFirst();
     boolean removeLast();
     boolean isEmpty();
-//    E getFirst();
-//    E getLast();
+    E getFirst();
+    E getLast();
     int size();
     boolean contains(E element);
 //    boolean set(int index, E element);

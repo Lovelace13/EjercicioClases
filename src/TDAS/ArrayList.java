@@ -68,7 +68,7 @@ public class ArrayList<E> implements List<E>{
         for(int i = efectivo; i > 0; i--)
             array[i] = array[i-1];
         
-        array[0] = element;
+        this.array[0] = element;
         efectivo++;
         return true;
     }
@@ -249,5 +249,15 @@ public class ArrayList<E> implements List<E>{
         }
 
         return true;
+    }
+
+    @Override
+    public E getFirst() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E getLast() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
