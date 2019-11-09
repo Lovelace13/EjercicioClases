@@ -86,11 +86,8 @@ public class SimpleLinkedList<E> implements List<E> {
         else if (this.first == this.last)
             this.first = this.last = null;
         else{
-
-//            temp = this.getPrevious(this.last);
-//            this.last = temp;
-//            temp.setNext(null);
-//            efectivo--;
+            
+            
         }
         return true;
     }

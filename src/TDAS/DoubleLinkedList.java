@@ -40,6 +40,7 @@ public class DoubleLinkedList<E> implements List<E> {
         return true;
     }
 
+
     @Override
     public boolean addLast(E element) {
         if(this.isEmpty())
@@ -65,7 +66,23 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean removeLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(this.isEmpty())
+            return false;
+        else if(this.first == this.last){
+            this.first.setData(null);
+            this.first = this.last = null;
+        }else{
+            this.last.setData(null);
+            this.last = this.last.getPrevious();
+            
+            Nodo<E> temp = this.last.getNext();
+            temp.setPrevious(null);
+            last.setNext(null);
+            
+        }
+        efectivo++;
+        return true;
     }
 
     @Override
