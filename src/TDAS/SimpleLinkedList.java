@@ -22,7 +22,8 @@ public class SimpleLinkedList<E> implements List<E> {
         last=null;
     }
     
-    public boolean isEmty(){
+    @Override
+    public boolean isEmpty(){
         return first==null && last==null;
     }
     
@@ -34,7 +35,7 @@ public class SimpleLinkedList<E> implements List<E> {
         Node<E> node= new Node<>(element);
         if(element==null)
             return false;
-        else if(isEmty())            
+        else if(isEmpty())            
             first=last=node;         
         else{           
             node.setNext(first);
@@ -48,7 +49,7 @@ public class SimpleLinkedList<E> implements List<E> {
         Node<E> node= new Node<>(element);
         if(element==null)
             return false;
-        else if(isEmty())
+        else if(isEmpty())
             first=last=node; 
         else{           
             last.setNext(node);
@@ -94,10 +95,6 @@ public class SimpleLinkedList<E> implements List<E> {
         return true;
     }
 
-    @Override
-    public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public boolean contains(E element) {
