@@ -5,6 +5,8 @@
  */
 package TDAS;
 
+import Nodos.Node;
+
 /**
  *
  * @author CltControl
@@ -159,7 +161,9 @@ public class SimpleLinkedList<E> implements List<E> {
 
     @Override
     public E getFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.isEmpty())
+            return null;
+        return this.first.getData();
     }
 
     @Override
@@ -170,8 +174,26 @@ public class SimpleLinkedList<E> implements List<E> {
     }
     
     @Override
-    public boolean  equals(Object other)    {
-      return this == other;
-   }
+    public boolean equals(Object other)    {
+        if(other == null || !(other instanceof SimpleLinkedList))
+            return false;
+        
+        SimpleLinkedList<E> objeto = (SimpleLinkedList) other;
+        
+        if(this.size() != objeto.size())
+            return false;
+        
+        Node<E> p = this.first;
+        Node<E> q = objeto.first;
+        
+        while( p != null){
+            if( !p.getData().equals(q.getData()))
+                return false;
+            
+            p = p.getNext();
+            q = q.getNext();
+        }
+        return true;        
+    }
    
 }
