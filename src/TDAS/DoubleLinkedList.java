@@ -5,6 +5,7 @@
  */
 package TDAS;
 
+import Interfaces.List;
 import Nodos.Nodo;
 /**
  *
@@ -127,6 +128,11 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(int index) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public E getPrevious() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

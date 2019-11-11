@@ -5,6 +5,10 @@
  */
 package TDAS;
 
+import Interfaces.List;
+import java.util.Iterator;
+import java.util.ListIterator;
+
 /**
  *
  * @author ktiusk
@@ -260,4 +264,79 @@ public class ArrayList<E> implements List<E>{
     public E getLast() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public Iterator<E> iterator(){
+        Iterator<E> it = new Iterator<E>() {
+            private int indice = 0;
+            
+            @Override
+            public boolean hasNext() {
+                return indice < efectivo && array[indice] != null;
+            }
+
+            @Override
+            public E next() {
+                return array[indice++];
+            }
+        };
+                
+        return it;
+    }
+    
+    public ListIterator<E> listIterator(int index){
+        ListIterator<E> lit = new ListIterator<E>(){
+            @Override
+            public boolean hasNext() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public E next() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public E previous() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int nextIndex() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int previousIndex() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void set(E e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void add(E e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+            
+        };
+        return lit;
+    }
+
+    @Override
+    public E getPrevious() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
+

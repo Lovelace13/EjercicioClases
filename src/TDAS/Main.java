@@ -5,9 +5,15 @@
  */
 package TDAS;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
+import Objetos.Estudiante;
+import java.util.PriorityQueue;
+import java.util.Queue;
 /**
  *
- * @author CltControl
+ * @author Katiuska
  */
 public class Main {
 
@@ -17,6 +23,34 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<String> nombres = new ArrayList<String>();
         ArrayList<String> NuevosNombres = new ArrayList<String>();
+        SimpleLinkedList<String> ListaEquipos = new SimpleLinkedList<>();
+        LinkedList<Integer> lista = new LinkedList<>();
+        
+        lista.add(10);
+        lista.add(100);
+        lista.add(20);
+        
+        ListaEquipos.addFirst("Emelec");
+        ListaEquipos.addLast("Barza");
+        
+        Iterator<String> it = ListaEquipos.iterator();
+        while(it.hasNext()){
+            String s = it.next();
+        }
+        
+        ListIterator<Integer> lit = lista.listIterator(lista.size());
+        while(lit.hasPrevious()){
+            Integer n = lit.previous();
+            System.out.println(n);
+        }
+        
+//        ListIterator<Integer> it2 =  lista.listIterator(1);
+//        it2.remove();
+//        System.out.println(lista);
+        
+        //Comparacion con expresion lambda
+        lista.sort(Integer::compareTo);
+        System.out.println(lista);
         
         nombres.addLast("Juan");
         nombres.addLast("María");
@@ -38,6 +72,21 @@ public class Main {
         System.out.println(nombres);
         nombres.remove(9);
         System.out.println(nombres);
+        
+        
+        //COlas: Queue
+
+        Estudiante student1 = new Estudiante("jimenez", 19);
+        Estudiante student2 = new Estudiante("Garcia", 20);
+        Estudiante student3 = new Estudiante("Ortega", 15);
+        
+        Queue<Estudiante> cola = new PriorityQueue<>((Estudiante e1, Estudiante e2) -> e1.getEdad() - e2.getEdad());
+        
+        cola.offer(student1);
+        cola.offer(student2);
+        cola.offer(student3);
+        
+        System.out.println(cola);
     }
     
 }

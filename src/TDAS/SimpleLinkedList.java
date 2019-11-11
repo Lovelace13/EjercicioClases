@@ -5,7 +5,9 @@
  */
 package TDAS;
 
+import Interfaces.List;
 import Nodos.Node;
+import java.util.Iterator;
 
 /**
  *
@@ -86,8 +88,8 @@ public class SimpleLinkedList<E> implements List<E> {
         else if (this.first == this.last)
             this.first = this.last = null;
         else{
-            
-            
+//            last.setNext(node);
+//            last=node;            
         }
         return true;
     }
@@ -189,5 +191,35 @@ public class SimpleLinkedList<E> implements List<E> {
         }
         return true;        
     }
+    
+    /**
+     * Método que va a instaciar un iterador. Explora la lista a través de next
+     * @return Iterator
+     */   
+    public Iterator<E> iterator(){
+        Iterator<E> it = new Iterator<E>() {
+            
+            private Node<E> p = first;
+            @Override
+            public boolean hasNext() {
+                return p != null;
+            }
+
+            @Override
+            public E next() {
+                E temp = p.getData();
+                p = p.getNext();
+                return temp;
+            }
+        };
+                
+        return it;
+    }
+
+    @Override
+    public E getPrevious() {
+        return null;
+    }
+            
    
 }

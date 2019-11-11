@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TDAS;
+package Interfaces;
 
 /**
  *
@@ -20,6 +20,7 @@ public interface List <E> {
     E getFirst();
     E getLast();
     int size();
+    E getPrevious();
     boolean contains(E element);
 //    boolean set(int index, E element);
 //    E get(int index);
