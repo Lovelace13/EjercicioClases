@@ -132,7 +132,8 @@ public class DoubleLinkedList<E> implements List<E> {
     }
 
     @Override
-    public E getPrevious() {
+    public E get(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

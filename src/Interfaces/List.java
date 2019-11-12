@@ -20,10 +20,10 @@ public interface List <E> {
     E getFirst();
     E getLast();
     int size();
-    E getPrevious();
+//    E getPrevious();
     boolean contains(E element);
 //    boolean set(int index, E element);
-//    E get(int index);
+    E get(int index);
     List<E> slicing(int start, int end);
     void reverse();
     boolean set(int index, E element);

@@ -88,18 +88,25 @@ public class SimpleLinkedList<E> implements List<E> {
         else if (this.first == this.last)
             this.first = this.last = null;
         else{
-//            last.setNext(node);
-//            last=node;            
+            last.setData(null);
+            this.last = getPrevious(this.last);
+            this.last.setNext(null);
         }
+        this.efectivo--;
         return true;
     }
 
 
     @Override
     public boolean contains(E element) {
-        for (Node<E> p = this.first; p != null; p = p.getNext())
-            if (p.getData().equals(element))
-                return true;
+        if(isEmpty() && element == null)
+            return false;
+        else{
+            for (Node<E> p = this.first; p != null; p = p.getNext()){
+                if (p.getData().equals(element))
+                    return true;
+            } 
+        }    
 
         return false;
     }
@@ -127,9 +134,32 @@ public class SimpleLinkedList<E> implements List<E> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Inserta un elemento en el index indicado en el método
+     * @param index
+     * @param element
+     * @return 
+     */
     @Override
     public boolean set(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(index == 0 && isEmpty()){
+            this.first.setData(element);
+            return true;
+        }else if (index == this.efectivo)
+            this.last.setData(element);
+        else if(!isEmpty() && index >= 0 && index <= this.efectivo)
+        {
+            int indice = 0;
+            Node<E> remplazo; //Un temporal que va a ser para el nodo anterior del que sera removido y para para el nodo siguiente
+            for(Node<E> nodo = this.first; nodo != null; nodo = nodo.getNext()){
+                if( indice == index){
+                    nodo.setData(element);
+                    return true;
+                }
+                indice++;
+            }
+        }
+        return false;            
     }
 
     @Override
@@ -139,7 +169,28 @@ public class SimpleLinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if( index == 0 && !this.isEmpty()){
+            this.removeFirst();
+            return true;
+        }else if (index == this.efectivo){
+            this.removeLast();
+            return true;
+        }else if(!this.isEmpty() && index > 0 && index < this.efectivo){
+            int indice = 0;
+            Node<E> siguiente, anterior; //Un temporal que va a ser para el nodo anterior del que sera removido y para para el nodo siguiente
+            for(Node<E> nodo = this.first; nodo != null; nodo = nodo.getNext()){
+                if( indice == index){
+                    anterior = this.getPrevious(nodo);
+                    siguiente = nodo.getNext();
+                    nodo.setNext(null);
+                    anterior.setNext(siguiente);
+                    this.efectivo--;
+                    return true;
+                }
+                indice++;
+            }
+        }
+        return false;
     }
     
     @Override
@@ -216,10 +267,35 @@ public class SimpleLinkedList<E> implements List<E> {
         return it;
     }
 
-    @Override
-    public E getPrevious() {
-        return null;
+    private Node<E> getPrevious(Node<E> p){
+        if(p != this.first){
+            for(Node<E> q = this.first; q!= null; q = q.getNext()){
+                if(q.getNext() == p)
+                    return q;
+            }    
+        }
+        return null;      
     }
+
+    @Override
+    public E get(int index) {
+        
+        if(isEmpty() || index < 0 || index > this.efectivo)
+            return null;
+        else if(index == this.efectivo)
+            return this.last.getData();
+        
+        int cont = 0;
+        Node<E> p = this.first;
+        while(index != cont){
+            p = p.getNext();
+            cont++;
+        }
+        return p.getData();
+        
+    }
+
+
             
    
 }
