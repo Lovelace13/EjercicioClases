@@ -129,9 +129,25 @@ public class SimpleLinkedList<E> implements List<E> {
         return lit;
     }
 
+    /**
+     * Reasigna el enlace de la lista intercambiando las posiciones
+     */
     @Override
     public void reverse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Node<E> nodo_viajero = this.first;
+        Node<E> siguiente = null;
+        Node<E> anterior  = null;
+        
+        while( nodo_viajero != null){
+            siguiente = nodo_viajero.getNext();
+            nodo_viajero.setNext(anterior);
+            anterior = nodo_viajero;
+            nodo_viajero = siguiente;
+        }
+        
+        this.first = anterior;
+ 
     }
 
     /**

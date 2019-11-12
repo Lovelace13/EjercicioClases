@@ -32,17 +32,23 @@ public class Main {
         
         ListaEquipos.addFirst("Emelec");
         ListaEquipos.addLast("Barza");
+        ListaEquipos.addLast("Friends");
+        ListaEquipos.addLast("Champions");
         
-        Iterator<String> it = ListaEquipos.iterator();
-        while(it.hasNext()){
-            String s = it.next();
-        }
+        System.out.println(ListaEquipos);
+        ListaEquipos.reverse();
+        System.out.println(ListaEquipos);
         
-        ListIterator<Integer> lit = lista.listIterator(lista.size());
-        while(lit.hasPrevious()){
-            Integer n = lit.previous();
-            System.out.println(n);
-        }
+//        Iterator<String> it = ListaEquipos.iterator();
+//        while(it.hasNext()){
+//            String s = it.next();
+//        }
+//        
+//        ListIterator<Integer> lit = lista.listIterator(lista.size());
+//        while(lit.hasPrevious()){
+//            Integer n = lit.previous();
+//            System.out.println(n);
+//        }
         
 //        ListIterator<Integer> it2 =  lista.listIterator(1);
 //        it2.remove();
@@ -61,17 +67,17 @@ public class Main {
         nombres.addLast("Fabricio");
         
         System.out.println(nombres);
-        NuevosNombres = (ArrayList) nombres.slicing(2,5);
-        System.out.println(NuevosNombres);
-        nombres.reverse();
-        System.out.println(nombres);
-        nombres.set(4, "Ericka");
-        System.out.println(nombres);
-        nombres.insert(4, "Joyce");
-        nombres.insert(1, "Katiuska");
-        System.out.println(nombres);
-        nombres.remove(9);
-        System.out.println(nombres);
+//        NuevosNombres = (ArrayList) nombres.slicing(2,5);
+//        System.out.println(NuevosNombres);
+//        nombres.reverse();
+//        System.out.println(nombres);
+//        nombres.set(4, "Ericka");
+//        System.out.println(nombres);
+//        nombres.insert(4, "Joyce");
+//        nombres.insert(1, "Katiuska");
+//        System.out.println(nombres);
+//        nombres.remove(9);
+//        System.out.println(nombres);
         
         
         //COlas: Queue
@@ -86,7 +92,7 @@ public class Main {
         cola.offer(student2);
         cola.offer(student3);
         
-        System.out.println(cola);
+//        System.out.println(cola);
     }
     
 }
