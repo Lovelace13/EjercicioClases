@@ -289,6 +289,11 @@ public class SimpleLinkedList<E> implements List<E> {
         return it;
     }
 
+    /**
+     * Me devuelve el nodo anterior al del parametro
+     * @param p
+     * @return Node
+     */
     private Node<E> getPrevious(Node<E> p){
         if(p != this.first){
             for(Node<E> q = this.first; q!= null; q = q.getNext()){

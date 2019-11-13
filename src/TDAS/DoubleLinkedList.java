@@ -141,35 +141,69 @@ public class DoubleLinkedList<E> implements List<E> {
         return false;
     }
 
+    /**
+     * Divide la lista enlazada desde la posición que se le indique. Esta 
+     * posición puede empezar desde cero hasta el size de la lista.
+     * @param start
+     * @param end
+     * @return List
+     */
     @Override
     public List<E> slicing(int start, int end) {
         
         List<E> lista;
         lista = new SimpleLinkedList<E>();
-        
-        if(isEmpty())
-            return null;
-        
-        if(start < 0 && end > this.efectivo)
-            return null;
-        
-        int contador = 0;
-        for(Nodo<E> p = this.first; p != null; p.getNext()){
-            if ( contador == start && contador < end){
-                lista.addLast(p.getData());
+               
+        if(start >= 0 && end <= this.efectivo){
+            int contador = 0;
+            for(Nodo<E> p = this.first; p != null; p.getNext()){
+                if ( contador == start && contador < end){
+                    lista.addLast(p.getData());
+                }
             }
-        }
-        return lista;
+            return lista;   
+        }       
+        
+        return null;
+    
     }
 
+    /**
+     * Invierte el orde de los elementos de la lista doblemente enlazada
+     */
     @Override
     public void reverse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Nodo<E> temp;
+        Nodo<E> viajero = this.first;
+        
+        while( viajero != null){
+            temp = viajero.getPrevious();
+            viajero.setPrevious(viajero.getNext());
+            viajero.setNext(temp);
+            viajero = viajero.getPrevious();
+        }
     }
 
     @Override
     public boolean set(int index, E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(index == 0 && isEmpty()){
+            this.first.setData(element);
+            return true;
+        }else if (index == this.efectivo)
+            this.last.setData(element);
+        else if(!isEmpty() && index > 0 && index < this.efectivo)
+        {
+            int indice = 0;
+            
+            for(Nodo<E> nodo = this.first; nodo != null; nodo = nodo.getNext()){
+                if( indice == index){
+                    nodo.setData(element);
+                    return true;
+                }
+                indice++;
+            }
+        }
+        return false;   
     }
 
     @Override
@@ -177,9 +211,37 @@ public class DoubleLinkedList<E> implements List<E> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * remueve un elemento de la lista indicado por la ubicación
+     * @param index
+     * @return boolean
+     */
     @Override
     public boolean remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if( index == 0 && !this.isEmpty()){
+            this.removeFirst();
+            return true;
+        }else if (index == this.efectivo){
+            this.removeLast();
+            return true;
+        }else if(!this.isEmpty() && index > 0 && index < this.efectivo){
+            int indice = 0;
+            Nodo<E> siguiente, anterior; //Un temporal que va a ser para el nodo anterior del que sera removido y para para el nodo siguiente
+            for(Nodo<E> nodo = this.first; nodo != null; nodo = nodo.getNext()){
+                if( indice == index){
+                    anterior = nodo.getPrevious();
+                    siguiente = nodo.getNext();
+                    nodo.setData(null);
+                    nodo.setNext(null);
+                    nodo.setPrevious(null);
+                    anterior.setNext(siguiente);
+                    this.efectivo--;
+                    return true;
+                }
+                indice++;
+            }
+        }
+        return false;
     }
 
     @Override
