@@ -41,7 +41,11 @@ public class DoubleLinkedList<E> implements List<E> {
         return true;
     }
 
-
+    /**
+     * Agrega un elemento de tipo E a la lista enlazada. Devuelve true si ha sido agregado
+     * @param element
+     * @return 
+     */
     @Override
     public boolean addLast(E element) {
         if(this.isEmpty())
@@ -62,7 +66,20 @@ public class DoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean removeFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                
+        if(this.isEmpty())
+            return false;
+        else if( first == last){
+            first.setData(null);
+            first = last = null;
+        }else{
+            Nodo<E> temp = first;
+            this.first = this.first.getNext();
+            this.first.setPrevious(null);
+            temp.setNext(null);
+        }
+        efectivo--; 
+        return true;
     }
 
     @Override
@@ -86,29 +103,63 @@ public class DoubleLinkedList<E> implements List<E> {
         return true;
     }
 
+    /**
+     * Devuelve el primer elemento de la lista
+     * @return E
+     */
     @Override
     public E getFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(isEmpty())
+            return null;
+        return this.first.getData();
     }
 
+    /**
+     * Devuelve el último elemento de la lista
+     * @return 
+     */
     @Override
     public E getLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(isEmpty())
+            return null;
+        return this.last.getData();
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.efectivo;
     }
 
     @Override
     public boolean contains(E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(isEmpty())
+            return false;
+        for(Nodo<E> p = this.first; p != null; p.getNext()){
+            if( p.getData().equals(element))
+                return true;
+        }
+        return false;
     }
 
     @Override
     public List<E> slicing(int start, int end) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        List<E> lista;
+        lista = new SimpleLinkedList<E>();
+        
+        if(isEmpty())
+            return null;
+        
+        if(start < 0 && end > this.efectivo)
+            return null;
+        
+        int contador = 0;
+        for(Nodo<E> p = this.first; p != null; p.getNext()){
+            if ( contador == start && contador < end){
+                lista.addLast(p.getData());
+            }
+        }
+        return lista;
     }
 
     @Override

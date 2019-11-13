@@ -29,10 +29,12 @@ public class SimpleLinkedList<E> implements List<E> {
         return first==null && last==null;
     }
     
+    @Override
     public int size(){
         return efectivo;
     }
     
+    @Override
     public boolean addFirst(E element){
         Node<E> node= new Node<>(element);
         if(element==null)
@@ -96,7 +98,11 @@ public class SimpleLinkedList<E> implements List<E> {
         return true;
     }
 
-
+    /**
+     * Devuelve "true" si contiene dicho elemento en la lista enlazada
+     * @param element
+     * @return boolean
+     */
     @Override
     public boolean contains(E element) {
         if(isEmpty() && element == null)
