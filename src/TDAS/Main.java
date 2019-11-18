@@ -11,6 +11,7 @@ import java.util.ListIterator;
 import Objetos.Estudiante;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 /**
  *
  * @author Katiuska
@@ -135,10 +136,25 @@ public class Main {
          */
         public static Stack<Integer> eliminarPrimeroK(int[] array, int k){
             Stack<Integer> pila = new Stack<>();
-            
+            int cont = 0;
+            for(int i = 0; i < array.length; i++){
+                if(pila.isEmpty())
+                    pila.push(array[i]);
+                else{
+                    while(!pila.isEmpty() && pila.peek() < array[i] && cont < k){
+                        pila.pop;
+                        cont++;
+                    }
+                    pila.push(array[i]);
+                }
+                
+                    
+            }
             return pila;
             //ejemplo
             //Entrada:  arr = [20,10,25,30,40]
             //Salidad:  arr = [25,30,40]
         }
 }
+
+        
