@@ -125,8 +125,20 @@ public class Main {
             }
         }
     
-        
+        /**
+         * Método que elimina los k primeros elementos de un arreglo de enteros que:
+         * Sean menores que el siguiente elemento
+         * Que se conviertan en menor que el siguiente, producto de la eliminación de otro elemento
+         * @param array
+         * @param k
+         * @return 
+         */
         public static Stack<Integer> eliminarPrimeroK(int[] array, int k){
+            Stack<Integer> pila = new Stack<>();
             
+            return pila;
+            //ejemplo
+            //Entrada:  arr = [20,10,25,30,40]
+            //Salidad:  arr = [25,30,40]
         }
 }
