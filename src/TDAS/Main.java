@@ -95,4 +95,38 @@ public class Main {
 //        System.out.println(cola);
     }
     
+    public static int posfix(String exp){
+        Stack<Integer> pila = new Stack<>();
+        String[] arr = exp.split(" ");
+        
+        for(int i = 0; i < arr.length; i++){
+            if(isOperando(arr[i]))
+                pila.push(Integer.parseInt(arr[i]));
+            else{
+                Integer n1 = pila.pop();
+                Integer n2 = pila.pop();
+                switch(arr[i]){
+                    case "+":
+                        pila.push(n1 + n2);
+                        break;
+                    case "-":
+                        pila.push(n1 - n2);
+                        break;
+                    case "*":
+                        pila.push(n1 * n2);
+                        break;
+                    case "/":
+                        pila.push(n1 / n2);
+                        break;
+                    default:
+                        pila.push(n1 * n2 - n1);
+                        break;
+                }
+            }
+        }
+    
+        
+        public static Stack<Integer> eliminarPrimeroK(int[] array, int k){
+            
+        }
 }

@@ -1,0 +1,5 @@
+2|chrome.exe|5|1
+3|winword.exe|8|0
+5|skype.exe|6|2
+1|firefox.exe|10|0
+4|cmd.exe|7|1
