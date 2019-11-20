@@ -52,30 +52,19 @@ public class ListSet<E> {
      * @param index
      * @return boolean
      */
-    public boolean remove(int index){
+    public boolean suprimir(E elemento){
         if(list.isEmpty())
             return false;
-        
-        if(list.size() < index)
-            return false;
-        
-        if(index == 0)
-        {
-            list.removeFirst();
-            return true;
-        }
-        
-        int count = 1;
+               
         ListIterator<E> lit = list.listIterator();
         while(lit.hasNext())
         {
             E data = lit.next();
-            if( count  == index)
+            if( data  ==  elemento)
             {                
                 lit.remove();
+                return true;
             }
-           
-            count++;
         }
         return true;
     }
