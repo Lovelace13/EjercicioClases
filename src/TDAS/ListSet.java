@@ -36,7 +36,7 @@ public class ListSet<E> {
                 E data = lit.next();
                 if(f.compare(data, element) == 0)
                     return false;
-                if(f.compare(data, element) > 0)
+                if(f.compare(data, element) < 0)
                 {
                     lit.add(element);
                     return true;
@@ -65,13 +65,13 @@ public class ListSet<E> {
             return true;
         }
         
-        int count = 0;
+        int count = 1;
         ListIterator<E> lit = list.listIterator();
         while(lit.hasNext())
         {
-            if( count + 1 == index)
-            {
-                E data = lit.next();
+            E data = lit.next();
+            if( count  == index)
+            {                
                 lit.remove();
             }
            

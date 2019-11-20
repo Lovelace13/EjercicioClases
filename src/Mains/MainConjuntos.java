@@ -29,8 +29,12 @@ public class MainConjuntos {
         ConjuntoNumPares.add(2);
         ConjuntoNumPares.add(8);
         ConjuntoNumPares.add(4);
+        ConjuntoNumPares.add(6);
         
         System.out.println(ConjuntoNumPares.toString());
+
+        ConjuntoNumPares.remove(3);
         
+        System.out.println(ConjuntoNumPares.toString());
     }
 }
