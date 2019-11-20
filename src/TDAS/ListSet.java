@@ -5,10 +5,93 @@
  */
 package TDAS;
 
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.ListIterator;
+
 /**
- *
+ * TDA Conjunto Ordenado
  * @author kmmarin
+ * @param <E>
  */
-public class ListSet {
+public class ListSet<E> {
+    private LinkedList<E> list;
+    private Comparator<E> f;
     
+    public ListSet(Comparator<E> compf){
+        this.f = compf;
+        list = new LinkedList<>();
+    }
+    
+    public boolean add(E element){
+        
+        if( element == null)
+            return false;
+        else if(list.isEmpty() || (f.compare(element, list.getLast()) > 0))
+            return list.add(element);
+        else{
+            ListIterator<E> lit = list.listIterator();
+            while(lit.hasNext())
+            {
+                E data = lit.next();
+                if(f.compare(data, element) == 0)
+                    return false;
+                if(f.compare(data, element) > 0)
+                {
+                    lit.add(element);
+                    return true;
+                }
+            }
+            
+        }
+        return true;
+    }
+    
+    /**
+     * Remueve un elemento de la lista según el índice
+     * @param index
+     * @return boolean
+     */
+    public boolean remove(int index){
+        if(list.isEmpty())
+            return false;
+        
+        if(list.size() < index)
+            return false;
+        
+        if(index == 0)
+        {
+            list.removeFirst();
+            return true;
+        }
+        
+        int count = 0;
+        ListIterator<E> lit = list.listIterator();
+        while(lit.hasNext())
+        {
+            if( count + 1 == index)
+            {
+                E data = lit.next();
+                lit.remove();
+            }
+           
+            count++;
+        }
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+        
+        String s = "[";
+        
+        for( int i = 0; i<list.size(); i++){
+            if ( i < list.size()-1 )
+                s+= list.get(i) + "," ;
+            else if ( i == list.size()-1)
+                s+= list.get(i) + "]";
+        } 
+        
+        return s ;
+    }
 }
