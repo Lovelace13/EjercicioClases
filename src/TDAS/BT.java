@@ -58,6 +58,18 @@ public class BT <E>{
         return false;
     }
     
+    public int alturaArbol()
+    {
+        return alturaArbol(this.root);
+    }
+    
+    public int alturaArbol(NodoArbol<E> raiz){
+        if( raiz == null)
+            return 0;
+        else
+            return 1 + Math.max(alturaArbol(raiz.getLeft()), alturaArbol(raiz.getRight()));
+    }
+    
     private NodoArbol<E> searchNodo(E data){
         return searchNodo(data, root);
     }
