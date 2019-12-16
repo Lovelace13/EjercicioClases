@@ -43,10 +43,39 @@ public class BT <E>{
             this.root = nodo;
             return true;
         }
+        else if(parent != null){
+            if(searchNodo(child) == null){
+                NodoArbol<E> nodoPadre = searchNodo(parent);
+                if (nodoPadre == null || (nodoPadre.getLeft() != null && nodoPadre.getRight() != null))
+                    return false;
+                else if(nodoPadre.getLeft() == null)
+                    nodoPadre.setLeft(nodo);
+                else
+                    nodoPadre.setRight(nodo);
+            }
+            return true;
+        }
         return false;
     }
     
-    private NodoArbol<E> find(E data){
-        return new NodoArbol<>(data);
+    private NodoArbol<E> searchNodo(E data){
+        return searchNodo(data, root);
+    }
+    
+    private NodoArbol<E> searchNodo(E data, NodoArbol<E> raiz){
+        
+        if(raiz == null)
+            return raiz;
+        else if(raiz.getData().equals(data))
+            return raiz;
+        else{
+            NodoArbol<E> l = searchNodo(data, raiz.getLeft());
+//            NodoArbol<E> r = searchNodo(data, raiz.getRight());
+//            
+//            if( l != null)
+//                return l;
+//            return r;
+            return (l != null) ? l: searchNodo(data, raiz.getRight());
+        }   
     }
 }

@@ -19,4 +19,24 @@ public class NodoArbol <E> {
         this.data = data;
         left = right = null;
     }
+    
+    public E getData() {
+        return data;
+    }
+    
+    public NodoArbol<E> getLeft() {
+        return this.left;
+    }
+    
+    public NodoArbol<E> getRight() {
+        return this.right;
+    }
+
+    public void setLeft(NodoArbol<E> left) {
+        this.left = left;
+    }
+
+    public void setRight(NodoArbol<E> right) {
+        this.right = right;
+    }
 }
