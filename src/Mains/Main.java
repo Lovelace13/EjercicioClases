@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TDAS;
+package Mains;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import Objetos.Estudiante;
+import TDAS.ArrayList;
+import TDAS.SimpleLinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
+
 /**
  *
  * @author Katiuska
@@ -125,36 +128,38 @@ public class Main {
                 }
             }
         }
-    
-        /**
-         * Método que elimina los k primeros elementos de un arreglo de enteros que:
-         * Sean menores que el siguiente elemento
-         * Que se conviertan en menor que el siguiente, producto de la eliminación de otro elemento
-         * @param array
-         * @param k
-         * @return 
-         */
-        public static Stack<Integer> eliminarPrimeroK(int[] array, int k){
-            Stack<Integer> pila = new Stack<>();
-            int cont = 0;
-            for(int i = 0; i < array.length; i++){
-                if(pila.isEmpty())
-                    pila.push(array[i]);
-                else{
-                    while(!pila.isEmpty() && pila.peek() < array[i] && cont < k){
-                        pila.pop;
-                        cont++;
-                    }
-                    pila.push(array[i]);
-                }
-                
-                    
-            }
-            return pila;
-            //ejemplo
-            //Entrada:  arr = [20,10,25,30,40]
-            //Salidad:  arr = [25,30,40]
-        }
-}
-
+        return 0;
+    }
         
+    private static boolean isOperando(String a) {
+        if(a!="+"||a!="-"||a!="*"||a!="/")
+            return true;
+        return false;
+    }     
+    
+    /**
+     * Método que elimina los k primeros elementos de un arreglo de enteros que:
+     * Sean menores que el siguiente elemento
+     * Que se conviertan en menor que el siguiente, producto de la eliminación de otro elemento
+     * @param array
+     * @param k
+     * @return 
+     */
+    public static Stack<Integer> eliminarPrimeroK(int[] array, int k){
+        Stack<Integer> pila = new Stack<>();
+        int c=0;
+        if(array!=null){                       
+            for(int i=0; i<array.length;i++){
+                while(!pila.empty()&&pila.peek()<array[i]&&c<k){
+                    pila.pop();
+                    c++;
+                }
+                pila.push(array[i]);                
+            }
+        }       
+        return pila;
+        //ejemplo
+        //Entrada:  arr = [20,10,25,30,40]
+        //Salidad:  arr = [25,30,40]
+    }
+}
