@@ -24,6 +24,10 @@ public class NodoArbol <E> {
         return data;
     }
     
+    public void setData(E data) {
+        this.data = data;
+    }
+    
     public NodoArbol<E> getLeft() {
         return this.left;
     }

@@ -8,6 +8,7 @@ package TDAS;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Objects;
 
 /**
  * TDA Conjunto Ordenado
@@ -211,6 +212,13 @@ public class ListSet<E> {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.list);
+        return hash;
     }
     
     @Override
