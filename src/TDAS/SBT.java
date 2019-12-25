@@ -131,18 +131,20 @@ public class SBT <E>{
 
     public void posOrden(){
         posOrden(root);
+        System.out.println();
     }
     private void posOrden(NodoArbol<E> n){
         if(n!=null){
             posOrden(n.getLeft());
             posOrden(n.getRight());
-            System.out.println(n.getData());
-        }
+            System.out.print(n.getData() + ", ");
+        }   
     }
 
     //preOrden--------
     public void preOrden(){
         preOrden(this.root);
+        System.out.println();
     }
     
     private void preOrden(NodoArbol<E> nodo){
@@ -157,6 +159,7 @@ public class SBT <E>{
     //enOrden-------
     public void enOrden(){
         enOrden(this.root);
+        System.out.println();
     }
     
     private void enOrden(NodoArbol<E> nodo){
@@ -167,6 +170,8 @@ public class SBT <E>{
             enOrden(nodo.getRight());
         }
     }
+    
+
         
     //un arbol esta desequilibrado cuando el factor de equilibrio es 2 o -2
     //factor de equilibrio(arura derecha-altura izquierda)
