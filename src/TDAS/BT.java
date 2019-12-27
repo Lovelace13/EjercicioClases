@@ -60,6 +60,7 @@ public class BT <E>{
    
     /**
      * Función auxiliar de "add"
+     * Devuelve el nodo buscado
      * @param data
      * @return NodoArbol
      */

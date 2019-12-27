@@ -62,9 +62,9 @@ public class SBT <E>{
     private NodoArbol<E> add(E element, NodoArbol<E> n){
         if(n == null)
             n = new NodoArbol<>(element);
-        else if(f.compare(element, n.getData())>0)
+        else if(f.compare(element, n.getData()) > 0)
             n.setRight(add(element,n.getRight()));
-        else if(f.compare(element, n.getData())<0)
+        else if(f.compare(element, n.getData()) < 0)
             n.setLeft(add(element,n.getLeft()));
         return n;
     }
@@ -115,24 +115,54 @@ public class SBT <E>{
     }
     
     public boolean contains(E element){
-        if(element==null|| isEmpty()) return false;
-        return contains(element,root);
-         
+        if(element==null|| isEmpty()) 
+            return false;
+        return contains(element,root);         
     }
     
     private boolean contains(E element, NodoArbol<E> n){
-        if(n==null) return false;
-        else if(f.compare(element, n.getData())>0){
+        
+        if(n == null) 
+            return false;
+        else if(f.compare(element, n.getData())>0)
+        {
             contains(element,n.getRight());
-        }else if(f.compare(element, n.getData())<0){
+        }
+        else if(f.compare(element, n.getData())<0)
+        {
             contains(element,n.getLeft());
-        }return true;
+        }
+        return true;
+    }
+    
+    /**
+     * Función auxiliar de "add"
+     * Devuelve el nodo buscado
+     * @param data
+     * @return NodoArbol
+     */
+    private NodoArbol<E> searchNodo(E data){
+        return searchNodo(data, root);
+    }
+    
+    private NodoArbol<E> searchNodo(E data, NodoArbol<E> raiz){
+        
+        if(raiz == null)
+            return raiz;
+        else if(raiz.getData().equals(data))
+            return raiz;
+        else{
+            NodoArbol<E> l = searchNodo(data, raiz.getLeft());
+
+            return (l != null) ? l: searchNodo(data, raiz.getRight());
+        }   
     }
 
     public void posOrden(){
         posOrden(root);
         System.out.println();
     }
+    
     private void posOrden(NodoArbol<E> n){
         if(n!=null){
             posOrden(n.getLeft());
@@ -140,15 +170,63 @@ public class SBT <E>{
             System.out.print(n.getData() + ", ");
         }   
     }
+    
+    /**
+     * Midel el nivel de un nodo específico del árbol
+     * @param element
+     * @return int
+     */
+    public int nivel(E element){
+        
+        if(!contains(element))
+            return 0;
+        else{
+            NodoArbol<E> n = searchNodo(element);
+            return 1 + Math.max(nivel(n.getLeft()), nivel(n.getRight()));
+        }
+    }
+    
+    private int nivel(NodoArbol<E> raiz){
+        if( raiz == null)
+            return 0;
+        else
+            return 1 + Math.max(alturaArbol(raiz.getLeft()), alturaArbol(raiz.getRight()));
+    }
+    
+    /**
+     * retorna un nuevo árbol que es espejo del árbol original
+     * @return SBT
+     */
+    public SBT<E> mirror(){
+        SBT<E> arbol = new SBT(f);
+        arbol.root= mirror(this.root);
+        return arbol;
+    }
 
+    private NodoArbol<E> mirror(NodoArbol<E> raiz)
+    {
+        
+        if( raiz == null){
+            return null;
+        }
+        NodoArbol<E> tmp = raiz;
+        
+        NodoArbol<E> izq = mirror(tmp.getLeft());
+        NodoArbol<E> der = mirror(tmp.getRight());
+        
+        tmp.setLeft(der);
+        tmp.setRight(izq);
+        return tmp;
+    }
+    
     //preOrden--------
     public void preOrden(){
         preOrden(this.root);
         System.out.println();
     }
     
-    private void preOrden(NodoArbol<E> nodo){
-        
+    private void preOrden(NodoArbol<E> nodo)
+    {   
         if(nodo != null){
             System.out.print(nodo.getData() + ", ");
             preOrden(nodo.getLeft());
@@ -171,7 +249,40 @@ public class SBT <E>{
         }
     }
     
-
+    /**
+     * determina si dos árboles binarios son iguales en estructura y contenidos
+     * @param o
+     * @return 
+     */
+    @Override
+    public boolean equals(Object o)
+    {        
+        if (o == null || !(o instanceof SBT)) {
+            return false;
+        }
+        SBT otherTree = (SBT) o;
+        
+        if(this.isEmpty()||otherTree.isEmpty()){
+            return false;
+        }
+        return equals(this.root, otherTree.root) && f.compare(this.root.getData(), (E) otherTree.root.getData()) == 0;
+    }
+    
+    private boolean equals(NodoArbol<E> abb1, NodoArbol<E> abb2){
+        if(abb1 == null || abb2 == null){
+            return true;
+        }else if (!(abb1.getData().equals(abb2.getData()))){
+            return false;
+        }else {
+            return equals(abb1.getLeft(),abb2.getLeft()) && equals(abb1.getRight(), abb2.getRight());
+        }
+    }
+    
+    @Override
+    public String toString() {
+        
+        return "ArbolBB{" + root + '}';
+    }
         
     //un arbol esta desequilibrado cuando el factor de equilibrio es 2 o -2
     //factor de equilibrio(arura derecha-altura izquierda)
@@ -194,7 +305,7 @@ public class SBT <E>{
     //ROTACION  DERECHA IZQUIERDA
     //n=raiz, n1=der n2=izq
     //n2 pasa a ser raiz, n1 sera hijo dere y n sera hijo izq
-   //caso especial (n2 tiene hijo izquierdo): el hijo de n2 ahora sera hijoderecho de n1 
+    //caso especial (n2 tiene hijo izquierdo): el hijo de n2 ahora sera hijoderecho de n1 
                    //(n2 tiene hijo derecho): el hijo de n2 ahora sera hijo izq de n1 
                   //(n2 tiene 2 hijos): 
 }
