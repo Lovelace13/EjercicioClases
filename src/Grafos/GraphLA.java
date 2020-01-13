@@ -17,6 +17,9 @@ public class GraphLA<E> {
      * Lista de adyacencia de vertices del grafo
      */
     private List<Vertex<E>> vertexes; 
+    /**
+     * Retorna verdadero si es dirigido
+     */
     private boolean directed;
     
     public GraphLA(boolean directed){
@@ -185,6 +188,8 @@ public class GraphLA<E> {
             }
         }
         salida.append("}");
+        
+        
         
         return salida.toString();
     }
