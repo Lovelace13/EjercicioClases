@@ -27,6 +27,7 @@ public class MainArbol {
         arbol.add(20);
         arbol.add(6);
         
+        System.out.println(arbol.toString());
         p = arbol.mirror();
         p.preOrden();
         
