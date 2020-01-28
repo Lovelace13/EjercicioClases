@@ -13,13 +13,9 @@ import java.util.List;
  * @author CltControl
  */
 public class GraphLA<E> {
-    /**
-     * Lista de adyacencia de vertices del grafo
-     */
+
     private List<Vertex<E>> vertexes; 
-    /**
-     * Retorna verdadero si es dirigido
-     */
+
     private boolean directed;
     
     public GraphLA(boolean directed){
@@ -27,11 +23,6 @@ public class GraphLA<E> {
         this.directed = directed;
     }
     
-    /**
-     * Agrega un vertice a la lista de adyacencia
-     * @param data
-     * @return boolean
-     */
     public boolean addVertex(E data){
         if ( data == null) 
             return false;
@@ -43,13 +34,6 @@ public class GraphLA<E> {
         return vertexes.add(V); //Se puede simplicar con ternaria
     }
     
-    /**
-     * Agrega un arco entre un vertice y otro con data 'origen', 'destino' y 'peso'
-     * @param origen
-     * @param destino
-     * @param peso
-     * @return 
-     */
     public boolean addEdge(E origen, E destino, int peso){
         if( origen == null || destino == null) return false;
         
@@ -69,11 +53,6 @@ public class GraphLA<E> {
         return true;
     }
     
-    /**
-     * Retorna 'Vertex' si existe un vértice del grafo 
-     * @param data
-     * @return Vertex
-     */
     private Vertex<E> buscarVertice(E data){
         for(Vertex<E> v : this.vertexes){
             if(v.getData().equals(data))

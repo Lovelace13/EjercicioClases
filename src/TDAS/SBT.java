@@ -29,8 +29,7 @@ public class SBT <E>{
  
     public int alturaArbol(){
         return alturaArbol(root);
-    }
-    
+    }    
     private int alturaArbol(NodoArbol<E> n){
         if(n == null) 
             return 0;
@@ -54,10 +53,9 @@ public class SBT <E>{
         if(element==null)
             return false;
         
-        this.root = add(element,root);
+        this.root = this.add(element,root);
         return true;
     }
-    
     private NodoArbol<E> add(E element, NodoArbol<E> n){
         if(n == null)
             n = new NodoArbol<>(element);
@@ -118,26 +116,24 @@ public class SBT <E>{
             return false;
         return contains(element,root);         
     }
-    
     private boolean contains(E element, NodoArbol<E> n){
         
         if(n == null) 
             return false;
         else if(f.compare(element, n.getData())>0)
         {
-            contains(element,n.getRight());
+            return contains(element,n.getRight());
         }
         else if(f.compare(element, n.getData())<0)
         {
-            contains(element,n.getLeft());
+            return contains(element,n.getLeft());
         }
         return true;
     }
     
     private NodoArbol<E> searchNodo(E data){
         return searchNodo(data, root);
-    }
-    
+    }  
     private NodoArbol<E> searchNodo(E data, NodoArbol<E> raiz){
         
         if(raiz == null)
@@ -154,8 +150,7 @@ public class SBT <E>{
     public void posOrden(){
         posOrden(root);
         System.out.println();
-    }
-    
+    }   
     private void posOrden(NodoArbol<E> n){
         if(n!=null){
             posOrden(n.getLeft());
@@ -165,15 +160,13 @@ public class SBT <E>{
     }
     
     public int nivel(E element){
-        
         if(!contains(element))
             return 0;
         else{
             NodoArbol<E> n = searchNodo(element);
-            return 1 + Math.max(nivel(n.getLeft()), nivel(n.getRight()));
+            return 1 + Math.max(nivel(n.getLeft()), this.nivel(n.getRight()));
         }
-    }
-    
+    }   
     private int nivel(NodoArbol<E> raiz){
         if( raiz == null)
             return 0;
@@ -186,10 +179,7 @@ public class SBT <E>{
         arbol.root= mirror(this.root);
         return arbol;
     }
-
-    private NodoArbol<E> mirror(NodoArbol<E> raiz)
-    {
-        
+    private NodoArbol<E> mirror(NodoArbol<E> raiz){
         if( raiz == null){
             return null;
         }
