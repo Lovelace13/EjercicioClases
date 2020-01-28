@@ -7,6 +7,7 @@ package TDAS;
 
 import Nodos.NodoArbol;
 import java.util.Comparator;
+import java.util.Objects;
 
 /**
  *
@@ -35,9 +36,7 @@ public class SBT <E>{
             return 0;
         return 1 + Math.max(alturaArbol(n.getLeft()),alturaArbol(n.getRight()));
     }
-    
-    //contador de nodos------
-    
+        
     public int contarHojas(){
         return contarHojas(root);
     }
@@ -135,12 +134,6 @@ public class SBT <E>{
         return true;
     }
     
-    /**
-     * Función auxiliar de "add"
-     * Devuelve el nodo buscado
-     * @param data
-     * @return NodoArbol
-     */
     private NodoArbol<E> searchNodo(E data){
         return searchNodo(data, root);
     }
@@ -171,11 +164,6 @@ public class SBT <E>{
         }   
     }
     
-    /**
-     * Midel el nivel de un nodo específico del árbol
-     * @param element
-     * @return int
-     */
     public int nivel(E element){
         
         if(!contains(element))
@@ -193,10 +181,6 @@ public class SBT <E>{
             return 1 + Math.max(alturaArbol(raiz.getLeft()), alturaArbol(raiz.getRight()));
     }
     
-    /**
-     * retorna un nuevo árbol que es espejo del árbol original
-     * @return SBT
-     */
     public SBT<E> mirror(){
         SBT<E> arbol = new SBT(f);
         arbol.root= mirror(this.root);
@@ -224,7 +208,6 @@ public class SBT <E>{
         preOrden(this.root);
         System.out.println();
     }
-    
     private void preOrden(NodoArbol<E> nodo)
     {   
         if(nodo != null){
@@ -239,7 +222,6 @@ public class SBT <E>{
         enOrden(this.root);
         System.out.println();
     }
-    
     private void enOrden(NodoArbol<E> nodo){
         
         if( nodo != null ){
@@ -249,11 +231,6 @@ public class SBT <E>{
         }
     }
     
-    /**
-     * determina si dos árboles binarios son iguales en estructura y contenidos
-     * @param o
-     * @return 
-     */
     @Override
     public boolean equals(Object o)
     {        
@@ -267,7 +244,7 @@ public class SBT <E>{
         }
         return equals(this.root, otherTree.root) && f.compare(this.root.getData(), (E) otherTree.root.getData()) == 0;
     }
-    
+  
     private boolean equals(NodoArbol<E> abb1, NodoArbol<E> abb2){
         if(abb1 == null || abb2 == null){
             return true;
