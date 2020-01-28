@@ -163,15 +163,19 @@ public class SBT <E>{
         if(!contains(element))
             return 0;
         else{
-            NodoArbol<E> n = searchNodo(element);
-            return 1 + Math.max(nivel(n.getLeft()), this.nivel(n.getRight()));
+            NodoArbol<E> n = this.root;
+            if(n.getData() == element)
+                return 1;
+            return 1 + Math.max(nivel(n.getLeft(), element), nivel(n.getRight(), element));
         }
     }   
-    private int nivel(NodoArbol<E> raiz){
+    private int nivel(NodoArbol<E> raiz, E element){
         if( raiz == null)
             return 0;
+        else if(raiz.getData() == element)
+            return 1;
         else
-            return 1 + Math.max(alturaArbol(raiz.getLeft()), alturaArbol(raiz.getRight()));
+            return 1 + Math.max(nivel(raiz.getLeft(), element), nivel(raiz.getRight(), element));
     }
     
     public SBT<E> mirror(){

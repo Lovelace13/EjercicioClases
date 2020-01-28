@@ -16,10 +16,37 @@ import java.util.Objects;
 public class Vertex<E> {
     private E data;
     private List<Edge<E>> edges;
+    private Vertex<E> antecesor;
+    private boolean visited;
+    private int distancia;
     
     public Vertex(E data){
         this.data = data;
         this.edges = new LinkedList<>();
+    }
+
+    public Vertex<E> getAntecesor() {
+        return antecesor;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public int getDistancia() {
+        return distancia;
+    }
+
+    public void setAntecesor(Vertex<E> antecesor) {
+        this.antecesor = antecesor;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    public void setDistancia(int distancia) {
+        this.distancia = distancia;
     }
 
     public void setData(E data) {

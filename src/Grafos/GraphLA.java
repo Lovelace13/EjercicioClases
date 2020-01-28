@@ -7,6 +7,8 @@ package Grafos;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Clase grafo no es multi-edge
@@ -42,7 +44,8 @@ public class GraphLA<E> {
         if( verOrigen == null || verDestino == null) return false;
         
         Edge<E> arco = new Edge<>(verOrigen, verDestino, peso);    
-        if( verOrigen.getEdges().contains(arco)) return false;
+        if( verOrigen.getEdges().contains(arco))
+            return false;
         verOrigen.getEdges().add(arco);
         
         if(!directed){
@@ -60,6 +63,61 @@ public class GraphLA<E> {
         }
         return null;
     }
+    
+    //busqueda por anchura
+    public List<E> bfs(E origen){
+        List<E> l = new LinkedList<>();
+        if (origen == null)
+            return l;
+        Vertex<E> verticeInicio = this.buscarVertice(origen);
+        if(verticeInicio== null)
+            return l;
+        Queue<Vertex<E>> q = new LinkedList<>();
+        verticeInicio.setVisited(true);
+        q.offer(verticeInicio);
+        while(!q.isEmpty()){
+            verticeInicio = q.poll();
+            l.add(verticeInicio.getData());
+            for(Edge<E> e : verticeInicio.getEdges()){
+                Edge<E> arco = (Edge<E>) e;
+                if(!arco.getDestino().isVisited()){
+                    arco.getDestino().setVisited(true);
+                    q.offer(arco.getDestino());
+                }
+            }
+        }
+        cleanVertex();
+        return l;
+    }
+    
+    public List<E> dfs(E origen){
+        LinkedList<E> lista= new LinkedList<>();
+        if(origen==null)
+            return lista;
+  
+        Vertex<E> ver = this.buscarVertice(origen);
+        if(ver == null)
+            return lista;
+        
+        Stack<Vertex<E>> pila=new Stack<>();
+        ver.setVisited(true);
+        pila.push(ver);
+        while(!pila.isEmpty()){
+            ver = pila.pop();
+            lista.add(ver.getData());
+            for(Edge<E> o: ver.getEdges()){
+                Edge<E> arco= (Edge<E>)o;
+                if(!arco.getDestino().isVisited()){
+                    arco.getDestino().setVisited(true);
+                    pila.push(arco.getDestino());
+                }
+            }
+        }
+        cleanVertex();
+        return lista;
+    }
+    
+    
     
     //TALLER
     
@@ -141,6 +199,14 @@ public class GraphLA<E> {
             arcos.remove();
         }
         return true;
+    }
+    
+    private void cleanVertex(){
+       for(Vertex<E> v :vertexes){
+            v.setVisited(false);
+            v.setDistancia(Integer.MAX_VALUE);
+            v.setAntecesor(null);
+        };
     }
     
     /**
