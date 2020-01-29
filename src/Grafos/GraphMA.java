@@ -95,6 +95,25 @@ public class GraphMA<E> {
         }
         return cont;
     }
+    
+    public GraphMA<E> reverse(){
+        if(!this.directed || this.isEmpty()){
+            return null;
+        }
+        GraphMA<E> grafo= new GraphMA<>(true);
+        for(E data: this.vertexes) {
+            grafo.addVertex(data);
+        }        
+        
+        
+        for(int fil=0; fil < 10; fil++){
+            for(int col=0;col<10;col++){
+                
+                grafo.matriz[fil][col]= this.matriz[col][fil];
+            }
+        }
+        return grafo;
+    }
 
     public int outDegree(E data){       
         if(!directed)

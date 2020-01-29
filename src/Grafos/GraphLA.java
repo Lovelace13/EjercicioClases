@@ -36,6 +36,10 @@ public class GraphLA<E> {
         return vertexes.add(V); //Se puede simplicar con ternaria
     }
     
+    public boolean isEmpty(){
+        return this.vertexes.isEmpty();
+    }
+    
     public boolean addEdge(E origen, E destino, int peso){
         if( origen == null || destino == null) return false;
         
@@ -62,6 +66,25 @@ public class GraphLA<E> {
                 return v;
         }
         return null;
+    }
+    
+    public GraphLA<E> reverse(){
+        if(!this.directed || this.isEmpty()){
+            return null;
+        }
+        GraphLA<E> grafo= new GraphLA<>(true);
+        for(Vertex<E> v: this.vertexes) {
+            grafo.addVertex(v.getData());
+        }        
+        
+        for(Vertex<E> v: this.vertexes){
+            for( Edge<E> e: v.getEdges()){
+                Vertex<E> origen=e.getOrigen();
+                Vertex<E> destino=e.getDestino();
+                grafo.addEdge(destino.getData(),origen.getData(),e.getPeso());
+            }
+        }
+        return grafo;
     }
     
     //busqueda por anchura
@@ -116,6 +139,8 @@ public class GraphLA<E> {
         cleanVertex();
         return lista;
     }
+    
+    
     
     
     

@@ -45,6 +45,24 @@ public class MainGrafos {
         grafoMA.addEdge(3,1,1);
         grafoMA.addEdge(10,5,3);
         grafoMA.toString();
+        
+//        System.out.println(grafoMA.toString());
+        
+        //
+        GraphLA<String> grafo2 = new GraphLA<>(true);
+        grafo2.addVertex("2");
+        grafo2.addVertex("1");
+        grafo2.addVertex("4");
+        grafo2.addVertex("3");
+        grafo2.addVertex("5");
+        grafo2.addEdge("2", "1", 5);
+        grafo2.addEdge("2", "4", 2);
+        grafo2.addEdge("1", "4", 8);
+        grafo2.addEdge("4", "3", 1);
+        grafo2.addEdge("4","5" , 6);
+        System.out.println(grafo2.toString());
+        GraphLA<String> graforeverse = new GraphLA<>(true);
+        graforeverse = grafo2.reverse();
+        System.out.println(graforeverse.toString());
     }
-    
 }
