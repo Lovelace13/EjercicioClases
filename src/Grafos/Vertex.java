@@ -23,6 +23,9 @@ public class Vertex<E> {
     public Vertex(E data){
         this.data = data;
         this.edges = new LinkedList<>();
+        this.visited = false;
+        this.distancia = Integer.MAX_VALUE;
+        this.antecesor = null;
     }
 
     public Vertex<E> getAntecesor() {
