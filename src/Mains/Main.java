@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import Objetos.Estudiante;
 import TDAS.ArrayList;
+import TDAS.DoubleLinkedList;
 import TDAS.SimpleLinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -85,20 +86,34 @@ public class Main {
         
         
         //COlas: Queue
-
-        Estudiante student1 = new Estudiante("jimenez", 19);
-        Estudiante student2 = new Estudiante("Garcia", 20);
-        Estudiante student3 = new Estudiante("Ortega", 15);
         
+        
+        
+//        Estudiante student1 = new Estudiante("jimenez", 19);
+//        Estudiante student2 = new Estudiante("Garcia", 20);
+//        Estudiante student3 = new Estudiante("Ortega", 15);
+//        
         Queue<Estudiante> cola = new PriorityQueue<>((Estudiante e1, Estudiante e2) -> e1.getEdad() - e2.getEdad());
         
-        cola.offer(student1);
-        cola.offer(student2);
-        cola.offer(student3);
+//        
+//        cola.offer(student1);
+//        cola.offer(student2);
+//        cola.offer(student3);
         
 //        System.out.println(cola);
+        DoubleLinkedList<String> listaNona = new DoubleLinkedList<>();
+        listaNona.addFirst("Juan");
+        listaNona.addLast("María");
+        listaNona.addLast("Jorge");
+        listaNona.addLast("Carmen");
+        listaNona.addLast("Guido");
+        listaNona.addLast("Hugo");
+        listaNona.addLast("Mateo");
+        System.out.println(listaNona.toString());
+        System.out.println(listaNona.intercambiarExtremos());
+        System.out.println(listaNona);
     }
-    
+     
     public static int posfix(String exp){
         Stack<Integer> pila = new Stack<>();
         String[] arr = exp.split(" ");

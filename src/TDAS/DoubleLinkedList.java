@@ -16,10 +16,6 @@ public class DoubleLinkedList<E> implements List<E> {
     private Nodo<E> last;
     private int efectivo;
     
-    /**
-     * Retorna verdadero si la lista esta vacía
-     * @return
-     */
     @Override
     public boolean isEmpty(){
         return first==null && last==null;
@@ -41,24 +37,22 @@ public class DoubleLinkedList<E> implements List<E> {
         return true;
     }
 
-    /**
-     * Agrega un elemento de tipo E a la lista enlazada. Devuelve true si ha sido agregado
-     * @param element
-     * @return 
-     */
     @Override
     public boolean addLast(E element) {
-        if(this.isEmpty())
+        Nodo<E> nuevo = new Nodo<>(element);
+        if(element == null)
             return false;
-        else if( this.first == this.last){
-            this.first.setData(null);
-            this.first = this.last.getNext();
-        }else{
-            this.last.setData(null);
-            this.last = this.last.getPrevious();
-            Nodo<E> temp = this.last.getNext();
-            temp.setPrevious(null);
-            last.setNext(null);
+        else if(this.isEmpty())
+            this.first = this.last = nuevo;
+        else 
+        {
+            this.first.setPrevious(null);
+            this.last.setNext(null);
+            this.last.setNext(nuevo);
+            nuevo.setPrevious(this.last);
+            nuevo.setNext(this.first);
+            this.first.setPrevious(nuevo);
+            this.last = nuevo;
         }
         efectivo++;
         return true;
@@ -103,10 +97,6 @@ public class DoubleLinkedList<E> implements List<E> {
         return true;
     }
 
-    /**
-     * Devuelve el primer elemento de la lista
-     * @return E
-     */
     @Override
     public E getFirst() {
         if(isEmpty())
@@ -114,10 +104,6 @@ public class DoubleLinkedList<E> implements List<E> {
         return this.first.getData();
     }
 
-    /**
-     * Devuelve el último elemento de la lista
-     * @return 
-     */
     @Override
     public E getLast() {
         if(isEmpty())
@@ -247,6 +233,53 @@ public class DoubleLinkedList<E> implements List<E> {
     @Override
     public E get(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean intercambiarExtremos(){
+        Nodo tempPrimero, sig;
+        Nodo tempUltimo, ant;
+        
+        if(this.isEmpty())
+            return false;
+        if(this.first == this.last)
+            return true;
+        else{
+            tempPrimero = this.last;
+            tempUltimo = this.first;
+            
+            sig = tempUltimo.getNext();
+            ant = tempPrimero.getPrevious();
+            
+            sig.setPrevious(null);
+            tempUltimo.setNext(null);
+            tempUltimo.setPrevious(null);
+            ant.setNext(null);
+            tempPrimero.setPrevious(null);
+            tempPrimero.setNext(null);
+            
+            sig.setPrevious(tempPrimero);
+            tempPrimero.setNext(sig);
+            
+            ant.setNext(tempUltimo);
+            tempUltimo.setPrevious(ant);
+            
+            tempPrimero.setPrevious(tempUltimo);
+            tempUltimo.setNext(tempPrimero);            
+        }
+        return true;        
+    }
+
+    @Override
+    public String toString() {
+        String s = "[";
+        for(Nodo<E> p = this.first; p != null; p = p.getNext())
+            if ( p.getNext() != this.first)
+                s+= p.getData().toString() + ",";
+            else
+                s+= p.getData().toString();
+        s+="]";
+        return s;
+        
     }
 
 }

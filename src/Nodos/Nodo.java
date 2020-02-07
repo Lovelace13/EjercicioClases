@@ -42,4 +42,11 @@ public class Nodo<E> {
     public void setPrevious(Nodo<E> previous) {
         this.previous = previous;
     }
+
+    @Override
+    public String toString() {
+        return "Nodo{" + "data=" + data + ", next=" + next + ", previous=" + previous + '}';
+    }
+    
+    
 }
