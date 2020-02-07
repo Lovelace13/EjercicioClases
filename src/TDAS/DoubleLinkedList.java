@@ -236,35 +236,36 @@ public class DoubleLinkedList<E> implements List<E> {
     }
     
     public boolean intercambiarExtremos(){
-        Nodo tempPrimero, sig;
-        Nodo tempUltimo, ant;
+        Nodo sig;
+        Nodo temp, ant;
         
         if(this.isEmpty())
             return false;
         if(this.first == this.last)
             return true;
         else{
-            tempPrimero = this.last;
-            tempUltimo = this.first;
-            
-            sig = tempUltimo.getNext();
-            ant = tempPrimero.getPrevious();
-            
+            sig = this.first.getNext();
             sig.setPrevious(null);
-            tempUltimo.setNext(null);
-            tempUltimo.setPrevious(null);
+            this.first.setNext(null);
+            
+            ant = this.last.getPrevious();
             ant.setNext(null);
-            tempPrimero.setPrevious(null);
-            tempPrimero.setNext(null);
             
-            sig.setPrevious(tempPrimero);
-            tempPrimero.setNext(sig);
+            this.last.setNext(null);
+            this.first.setPrevious(null);
             
-            ant.setNext(tempUltimo);
-            tempUltimo.setPrevious(ant);
+            temp = this.last;
+            this.last = this.first;
+            this.first = temp;
             
-            tempPrimero.setPrevious(tempUltimo);
-            tempUltimo.setNext(tempPrimero);            
+            sig.setPrevious(this.first);
+            this.first.setNext(sig);
+            this.first.setPrevious(this.last);
+            
+            ant.setNext(this.last);
+            this.last.setPrevious(ant);     
+            this.last.setNext(this.first);
+                     
         }
         return true;        
     }
@@ -272,11 +273,16 @@ public class DoubleLinkedList<E> implements List<E> {
     @Override
     public String toString() {
         String s = "[";
-        for(Nodo<E> p = this.first; p != null; p = p.getNext())
-            if ( p.getNext() != this.first)
+        int con = 0;
+        Nodo<E> p =this.first;
+        while(con < efectivo){
+            if ( p != this.last)
                 s+= p.getData().toString() + ",";
             else
                 s+= p.getData().toString();
+            p = p.getNext();
+            con++;
+        }
         s+="]";
         return s;
         
