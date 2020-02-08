@@ -134,11 +134,13 @@ public class DoubleLinkedList<E> implements List<E> {
         }
         return false;
     }
+    
     //f.compare(e1,e2) retorna >0 si e1 es mayor que e2, <0 si e1 es menor que e2
     public boolean sortedInsert(E element){
         Nodo<E> nuevo = new Nodo<>(element);
         
-        if(f.compare(this.first.getData(), element) > 0){
+        if(f.compare(this.first.getData(), element) > 0)
+        {
             this.first.setPrevious(nuevo);
             nuevo.setNext(this.first);
             this.first = nuevo;

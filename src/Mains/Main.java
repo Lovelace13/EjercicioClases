@@ -47,9 +47,9 @@ public class Main {
         listadoble.addLast(2);
         listadoble.addFirst(0);
         listadoble.addLast(9);
-        System.out.println(listadoble);
-        listadoble.sortedInsert(3);
-        System.out.println(listadoble);
+//        System.out.println(listadoble);
+//        listadoble.sortedInsert(3);
+//        System.out.println(listadoble);
         
         
         lista.add(10);
@@ -61,6 +61,12 @@ public class Main {
         ListaEquipos.addLast("Friends");
         ListaEquipos.addLast("Champions");
         ListaEquipos.addLast("Auca");
+        
+        Iterator<String> it = ListaEquipos.iteratorStep(0, 4);
+        while(it.hasNext()){
+            String data = it.next();
+            System.out.println(data);
+        }
         
 //        System.out.println(ListaEquipos);
 //        ListaEquipos.reverse();

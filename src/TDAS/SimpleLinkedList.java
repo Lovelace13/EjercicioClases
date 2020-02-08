@@ -283,6 +283,53 @@ public class SimpleLinkedList<E> implements List<E> {
                 
         return it;
     }
+    
+    public Iterator<E> iteratorStep(int s, int sp){
+        
+        Iterator<E> it = new Iterator<E>(){
+            private int start = s;
+            private int step = sp;
+            private Node<E> p = first;
+            
+            @Override
+            public boolean hasNext() {
+                int cont = 1; boolean f = false;
+                if(start != 0 ){
+                    for(Node<E> t = p; t != null; t = t.getNext()){
+                        if(cont == start){
+                            f = t != null;
+                            t = last;
+                        }
+                        cont++;
+                    }
+                    return p != null && f;
+                }
+                else
+                    return p!=null;                
+                
+            }
+
+            @Override
+            public E next() {
+                E temp;
+                int cont = 1;
+                if(start != 0 && start !=1){
+                    while(cont < start){
+                        p = p.getNext();
+                        cont++;
+                    }
+                }
+                else if(start == 1)
+                    p = p.getNext();
+                
+                temp = p.getData();
+                start = step;
+                p = p.getNext();
+                return temp;
+            }  
+        };
+        return it;
+    }
 
     private Node<E> getPrevious(Node<E> p){
         if(p != this.first){
