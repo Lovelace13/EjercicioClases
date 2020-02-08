@@ -10,8 +10,10 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import Objetos.Estudiante;
 import TDAS.ArrayList;
+import TDAS.CircularDoublyLinkedList;
 import TDAS.DoubleLinkedList;
 import TDAS.SimpleLinkedList;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
@@ -30,6 +32,25 @@ public class Main {
         ArrayList<String> NuevosNombres = new ArrayList<String>();
         SimpleLinkedList<String> ListaEquipos = new SimpleLinkedList<>();
         LinkedList<Integer> lista = new LinkedList<>();
+        Comparator<Integer> comparador = (pa, pb) -> pa - pb;
+        DoubleLinkedList<Integer> listadoble = new DoubleLinkedList<>(comparador);
+        
+        CircularDoublyLinkedList<Integer> num = new CircularDoublyLinkedList<>();
+        
+        num.addFirst(1);
+        num.addFirst(2);
+        num.addFirst(3);
+        num.addFirst(4);
+//        System.out.println(num);
+                
+        listadoble.addFirst(1);
+        listadoble.addLast(2);
+        listadoble.addFirst(0);
+        listadoble.addLast(9);
+        System.out.println(listadoble);
+        listadoble.sortedInsert(3);
+        System.out.println(listadoble);
+        
         
         lista.add(10);
         lista.add(100);
@@ -39,10 +60,12 @@ public class Main {
         ListaEquipos.addLast("Barza");
         ListaEquipos.addLast("Friends");
         ListaEquipos.addLast("Champions");
+        ListaEquipos.addLast("Auca");
         
-        System.out.println(ListaEquipos);
-        ListaEquipos.reverse();
-        System.out.println(ListaEquipos);
+//        System.out.println(ListaEquipos);
+//        ListaEquipos.reverse();
+//        ListaEquipos.removeLast();
+//        System.out.println(ListaEquipos);
         
 //        Iterator<String> it = ListaEquipos.iterator();
 //        while(it.hasNext()){
@@ -61,7 +84,7 @@ public class Main {
         
         //Comparacion con expresion lambda
         lista.sort(Integer::compareTo);
-        System.out.println(lista);
+//        System.out.println(lista);
         
         nombres.addLast("Juan");
         nombres.addLast("María");
@@ -71,7 +94,7 @@ public class Main {
         nombres.addLast("Hugo");
         nombres.addLast("Fabricio");
         
-        System.out.println(nombres);
+//        System.out.println(nombres);
 //        NuevosNombres = (ArrayList) nombres.slicing(2,5);
 //        System.out.println(NuevosNombres);
 //        nombres.reverse();
@@ -109,9 +132,9 @@ public class Main {
         listaNona.addLast("Guido");
         listaNona.addLast("Hugo");
         listaNona.addLast("Mateo");
-        System.out.println(listaNona.toString());
-        System.out.println(listaNona.intercambiarExtremos());
-        System.out.println(listaNona);
+//        System.out.println(listaNona.toString());
+//        System.out.println(listaNona.intercambiarExtremos());
+//        System.out.println(listaNona);
     }
      
     public static int posfix(String exp){

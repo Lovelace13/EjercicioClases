@@ -7,6 +7,7 @@ package TDAS;
 
 import Interfaces.List;
 import Nodos.Nodo;
+import java.util.Comparator;
 /**
  *
  * @author ktiusk
@@ -15,12 +16,23 @@ public class DoubleLinkedList<E> implements List<E> {
     private Nodo<E> first;
     private Nodo<E> last;
     private int efectivo;
+    private Comparator<E> f;
+
+    public DoubleLinkedList(Comparator<E> f) {
+        this.f = f;
+    }
+
+    public DoubleLinkedList() {
+//        this.efectivo = 0;
+    }
+    
     
     @Override
     public boolean isEmpty(){
         return first==null && last==null;
     }
     
+    @Override
     public boolean addFirst(E element){
         Nodo<E> nodo = new Nodo<> (element);
         if(element == null)
@@ -28,9 +40,8 @@ public class DoubleLinkedList<E> implements List<E> {
         else if(this.isEmpty())
             this.first = this.last = nodo;
         else{
-            Nodo<E> temp = this.first;
             nodo.setNext(this.first);
-            this.first.setPrevious(temp);
+            this.first.setPrevious(nodo);
             this.first = nodo;
         }  
         efectivo++;
@@ -40,18 +51,15 @@ public class DoubleLinkedList<E> implements List<E> {
     @Override
     public boolean addLast(E element) {
         Nodo<E> nuevo = new Nodo<>(element);
+        Nodo<E> temp = this.last;
         if(element == null)
             return false;
         else if(this.isEmpty())
             this.first = this.last = nuevo;
         else 
         {
-            this.first.setPrevious(null);
-            this.last.setNext(null);
-            this.last.setNext(nuevo);
             nuevo.setPrevious(this.last);
-            nuevo.setNext(this.first);
-            this.first.setPrevious(nuevo);
+            this.last.setNext(nuevo);
             this.last = nuevo;
         }
         efectivo++;
@@ -126,14 +134,41 @@ public class DoubleLinkedList<E> implements List<E> {
         }
         return false;
     }
+    //f.compare(e1,e2) retorna >0 si e1 es mayor que e2, <0 si e1 es menor que e2
+    public boolean sortedInsert(E element){
+        Nodo<E> nuevo = new Nodo<>(element);
+        
+        if(f.compare(this.first.getData(), element) > 0){
+            this.first.setPrevious(nuevo);
+            nuevo.setNext(this.first);
+            this.first = nuevo;
+            return true;
+        }
+        else if(f.compare(this.last.getData(), element) < 0){
+            this.last.setNext(nuevo);
+            nuevo.setPrevious(this.last);
+            this.last = nuevo;
+            return true;
+        }
+        else{
+            for(Nodo<E> p = this.first; p != null; p = p.getNext()){
+                if(p.getData() == element){
+                    return true;
+                }
+                else if(f.compare(p.getData(), element) < 0 && f.compare(p.getNext().getData(), element)>0){
+                    nuevo.setNext(p.getNext());
+                    nuevo.setPrevious(p);
+                    p.getNext().setPrevious(nuevo);
+                    p.setNext(nuevo);
+                    this.efectivo++;
+                    return true;
+                }            
+            }
+        }
 
-    /**
-     * Divide la lista enlazada desde la posición que se le indique. Esta 
-     * posición puede empezar desde cero hasta el size de la lista.
-     * @param start
-     * @param end
-     * @return List
-     */
+        return false;
+    }
+    
     @Override
     public List<E> slicing(int start, int end) {
         
@@ -197,11 +232,7 @@ public class DoubleLinkedList<E> implements List<E> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * remueve un elemento de la lista indicado por la ubicación
-     * @param index
-     * @return boolean
-     */
+    
     @Override
     public boolean remove(int index) {
         if( index == 0 && !this.isEmpty()){
@@ -234,7 +265,7 @@ public class DoubleLinkedList<E> implements List<E> {
     public E get(int index) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    //Aplica a la circuladoblylinkedlist
     public boolean intercambiarExtremos(){
         Nodo sig;
         Nodo temp, ant;
@@ -244,24 +275,26 @@ public class DoubleLinkedList<E> implements List<E> {
         if(this.first == this.last)
             return true;
         else{
+            //desconecto el primer nodo con la lista
             sig = this.first.getNext();
             sig.setPrevious(null);
             this.first.setNext(null);
-            
+            //desconecto el ultimo nodo con la lista
             ant = this.last.getPrevious();
             ant.setNext(null);
-            
+            this.last.setPrevious(null);
+            //desconecto los nodos primero y final
             this.last.setNext(null);
             this.first.setPrevious(null);
-            
+            //hago el intercambio
             temp = this.last;
             this.last = this.first;
             this.first = temp;
-            
+            //conecto el primer nodo que antes era ultimo
             sig.setPrevious(this.first);
             this.first.setNext(sig);
             this.first.setPrevious(this.last);
-            
+            //conecto el ultimo nodo que antes era primero
             ant.setNext(this.last);
             this.last.setPrevious(ant);     
             this.last.setNext(this.first);
@@ -273,16 +306,11 @@ public class DoubleLinkedList<E> implements List<E> {
     @Override
     public String toString() {
         String s = "[";
-        int con = 0;
-        Nodo<E> p =this.first;
-        while(con < efectivo){
+        for(Nodo<E> p = this.first; p != null; p = p.getNext())
             if ( p != this.last)
-                s+= p.getData().toString() + ",";
+                s+= p.getData() + ",";
             else
-                s+= p.getData().toString();
-            p = p.getNext();
-            con++;
-        }
+                s+= p.getData();
         s+="]";
         return s;
         

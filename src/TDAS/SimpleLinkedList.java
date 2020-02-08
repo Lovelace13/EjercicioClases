@@ -82,16 +82,14 @@ public class SimpleLinkedList<E> implements List<E> {
     }
 
     @Override
-    public boolean removeLast() {
-        Node<E> temp;
-        
+    public boolean removeLast() {        
         if(this.isEmpty())
             return false;
         else if (this.first == this.last)
             this.first = this.last = null;
         else{
             last.setData(null);
-            this.last = getPrevious(this.last);
+            this.last = this.getPrevious(this.last);
             this.last.setNext(null);
         }
         this.efectivo--;
@@ -218,12 +216,13 @@ public class SimpleLinkedList<E> implements List<E> {
     @Override
     public String toString() {
         String s = "[";
+        int acum =0;
         for(Node<E> p = this.first; p != null; p = p.getNext())
-            if ( p.getNext() != this.getLast())
-                s+= p.getData() + ",";
-            else
+            if ( p.getNext() != this.getLast()){
+                s+= p.getData() + ","; 
+            }else{
                 s+= p.getData();
-        s+="]";
+            }s+="]";
         return s;
         
     }
@@ -265,10 +264,6 @@ public class SimpleLinkedList<E> implements List<E> {
         return true;        
     }
     
-    /**
-     * Método que va a instaciar un iterador. Explora la lista a través de next
-     * @return Iterator
-     */   
     public Iterator<E> iterator(){
         Iterator<E> it = new Iterator<E>() {
             
@@ -289,11 +284,6 @@ public class SimpleLinkedList<E> implements List<E> {
         return it;
     }
 
-    /**
-     * Me devuelve el nodo anterior al del parametro
-     * @param p
-     * @return Node
-     */
     private Node<E> getPrevious(Node<E> p){
         if(p != this.first){
             for(Node<E> q = this.first; q!= null; q = q.getNext()){
