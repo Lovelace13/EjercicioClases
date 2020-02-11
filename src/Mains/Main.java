@@ -34,7 +34,7 @@ public class Main {
         LinkedList<Integer> lista = new LinkedList<>();
         Comparator<Integer> comparador = (pa, pb) -> pa - pb;
         DoubleLinkedList<Integer> listadoble = new DoubleLinkedList<>(comparador);
-        
+        DoubleLinkedList<Integer> listdo = new DoubleLinkedList<>();
         CircularDoublyLinkedList<Integer> num = new CircularDoublyLinkedList<>();
         
         num.addFirst(1);
@@ -42,11 +42,18 @@ public class Main {
         num.addFirst(3);
         num.addFirst(4);
 //        System.out.println(num);
-                
+
+        listdo.addFirst(2);
+        listdo.addLast(1);
+        listdo.addFirst(9);
+        listdo.addLast(0);
+        System.out.println(listdo);
         listadoble.addFirst(1);
         listadoble.addLast(2);
         listadoble.addFirst(0);
         listadoble.addLast(9);
+        System.out.println(listadoble);
+        System.out.println(listadoble.isReverse(listdo));
 //        System.out.println(listadoble);
 //        listadoble.sortedInsert(3);
 //        System.out.println(listadoble);
@@ -62,11 +69,11 @@ public class Main {
         ListaEquipos.addLast("Champions");
         ListaEquipos.addLast("Auca");
         
-        Iterator<String> it = ListaEquipos.iteratorStep(0, 4);
-        while(it.hasNext()){
-            String data = it.next();
-            System.out.println(data);
-        }
+//        Iterator<String> it = ListaEquipos.iteratorStep(0, 4);
+//        while(it.hasNext()){
+//            String data = it.next();
+//            System.out.println(data);
+//        }
         
 //        System.out.println(ListaEquipos);
 //        ListaEquipos.reverse();

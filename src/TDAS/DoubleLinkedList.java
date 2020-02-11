@@ -8,6 +8,7 @@ package TDAS;
 import Interfaces.List;
 import Nodos.Nodo;
 import java.util.Comparator;
+import java.util.Queue;
 /**
  *
  * @author ktiusk
@@ -303,6 +304,39 @@ public class DoubleLinkedList<E> implements List<E> {
                      
         }
         return true;        
+    }
+    
+    //Me dice si una lista es el reverso de otra
+    public boolean isReverse(DoubleLinkedList<E> l){
+        if(this.size() == 0 && l.size() == 0)
+            return true;
+        if(l.isEmpty())
+            return false;
+        if(l.size() == this.size()){
+            DoubleLinkedList<E> l1 = l;
+            DoubleLinkedList<E> l2 = this;
+            if(l1.getFirst() == l2.getLast()){
+                l1.removeFirst();
+                l2.removeLast();
+                return isReverse(l1, l2);    
+            }
+        }
+        return false;
+    }
+    
+    public boolean isReverse(DoubleLinkedList<E> listaExterna, DoubleLinkedList<E> lista){
+        DoubleLinkedList<E> l1 = listaExterna;
+        DoubleLinkedList<E> l2 = lista;
+        
+        
+        if(l1.getFirst() == l2.getLast()){
+            l1.removeFirst();
+            l2.removeLast();
+            if(l1.isEmpty() && l2.isEmpty())
+                return true;
+            return isReverse(l1, l2);
+        }
+        return false;
     }
 
     @Override
